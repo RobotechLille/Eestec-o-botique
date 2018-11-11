@@ -14,8 +14,13 @@ public class ConnectionBluetooth {
         @Override
         public void run() {
             // envoie les données
+            double limit = 1d;
+            if(MainActivity.limiteur != null)
+                limit = ((double) MainActivity.limiteur.getProgress()) / 100d;
+            int gauche = (int) ((((double) caller.gauche) - 127d) * limit) + 127;
+            int droite = (int) ((((double) caller.droite) - 127d) * limit) + 127;
             try {
-                MainActivity.socket.getOutputStream().write(toByte(caller.gauche, caller.droite));
+                MainActivity.socket.getOutputStream().write(toByte(gauche, droite));
             } catch (Exception ignored) {}
 
             // repeter

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     private ProgressBar progressBar;
 
+    public static SeekBar limiteur;
     public static BluetoothSocket socket;
 
     @Override
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         appareilListView = findViewById(R.id.liste_appareils);
         status = findViewById(R.id.status);
         progressBar = findViewById(R.id.progressBar);
+        limiteur = findViewById(R.id.limiteur);
 
         // bluetooth inactif ?
         if (!bluetoothAdapter.isEnabled()) {
@@ -161,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // actualise la liste des appareils
+        ArrayList<BluetoothDevice> appareilsJumle = AppareilAdapter.setToArrayList(bluetoothAdapter.getBondedDevices());
+        appareilAdapter = new AppareilAdapter(appareilsJumle, this);
+        appareilListView.setAdapter(appareilAdapter);
+        // test la connection
         if(socket == null || !socket.isConnected())
             changeStatus("non connecté", false, false);
     }
