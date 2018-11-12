@@ -2,7 +2,7 @@ const unsigned int ENA = 10;
 const unsigned int INA1 = 8;
 const unsigned int INA2 = 9;
 
-const unsigned int ENB = 44;
+const unsigned int ENB = 5;
 const unsigned int INB1 = 6;
 const unsigned int INB2 = 7;
 
