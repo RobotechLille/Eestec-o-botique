@@ -2,7 +2,7 @@ const unsigned int ENA = 10;
 const unsigned int INA1 = 8;
 const unsigned int INA2 = 9;
 
-const unsigned int ENB = 5;
+const unsigned int ENB = 44;
 const unsigned int INB1 = 6;
 const unsigned int INB2 = 7;
 
@@ -28,6 +28,7 @@ void setup() {
   digitalWrite(ENB, LOW);
 
   // init bluetooth
+  Serial.begin(9600);
   Serial2.begin(9600);
 }
 
@@ -51,7 +52,7 @@ void alimMoteurs(){
 
   // puissance
   analogWrite(ENA, gauche >= 0 ? gauche : -gauche);
-  analogWrite(ENA, droite >= 0 ? droite : -droite);
+  analogWrite(ENB, droite >= 0 ? droite : -droite);
 }
 
 void loop() {
@@ -66,8 +67,8 @@ void loop() {
   if(Serial2.available()){
     // g ou d recoit (unsigned) : [0, 255]
     // ce qui correspond à (signed) : [-127, 127]
-    int g = Serial2.read();
     int d = Serial2.read();
+    int g = Serial2.read();
 
     // [-inf, 0] -> 128
     // [0, inf] -> [0, inf]
@@ -81,6 +82,7 @@ void loop() {
     if(d > 255)
       d = 255;
 
+    
     if(g > 128){ // [128, 255]
       gauche = ((g - 0x7F) * 2) - 1; // [128, 255] -> [0, 255]
     }else{ // [0, 127]
@@ -93,6 +95,10 @@ void loop() {
       droite = ((0x7F - d) * -2) - 1; // [0, 127] -> [-255, 1]
     }
   }
+
+  Serial.println("-------");
+  Serial.println(gauche);
+  Serial.println(droite);
 
   // amilentation des moteurs
   alimMoteurs();

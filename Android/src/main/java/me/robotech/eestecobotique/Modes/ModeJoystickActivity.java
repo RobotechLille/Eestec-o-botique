@@ -13,7 +13,7 @@ import me.robotech.eestecobotique.ConnectionBluetooth;
 import me.robotech.eestecobotique.R;
 
 public class ModeJoystickActivity extends ModeActivity {
-    private static final int density = (int) Resources.getSystem().getDisplayMetrics().density;
+    private static final double density = Resources.getSystem().getDisplayMetrics().density;
 
     private ConnectionBluetooth connectionBluetooth;
 
@@ -35,8 +35,8 @@ public class ModeJoystickActivity extends ModeActivity {
                         majGaucheDroite(100 * density, 100 * density);
                         break;
                     default:
-                        joystick.setLayoutParams(getParams((int) event.getX(), (int) event.getY()));
-                        majGaucheDroite((int) event.getX(), (int) event.getY());
+                        joystick.setLayoutParams(getParams(event.getX(), event.getY()));
+                        majGaucheDroite(event.getX(), event.getY());
                         break;
                 }
                 return true;
@@ -46,7 +46,7 @@ public class ModeJoystickActivity extends ModeActivity {
         connectionBluetooth = new ConnectionBluetooth(this);
     }
 
-    private static RelativeLayout.LayoutParams getParams(int x, int y){
+    private static RelativeLayout.LayoutParams getParams(double x, double y){
         // taille du joystick
         x -= 25 * density;
         y -= 25 * density;
@@ -62,7 +62,7 @@ public class ModeJoystickActivity extends ModeActivity {
             y = 150 * density;
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(x, y, 0, 0);
+        params.setMargins((int) x, (int) y, 0, 0);
         return params;
     }
 
@@ -127,10 +127,6 @@ public class ModeJoystickActivity extends ModeActivity {
         }
         gauche = (int) ((g * 127) + 128);
         droite = (int) ((d * 127) + 128);
-
-        Log.d("ModeJoystickActivity", "-------");
-        Log.d("ModeJoystickActivity", String.valueOf(gauche));
-        Log.d("ModeJoystickActivity", String.valueOf(droite));
     }
 
     @Override

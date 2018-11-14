@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import me.robotech.eestecobotique.ConnectionBluetooth;
+import me.robotech.eestecobotique.MainActivity;
 import me.robotech.eestecobotique.R;
 
 public class ModeVoitureActivity extends ModeActivity {

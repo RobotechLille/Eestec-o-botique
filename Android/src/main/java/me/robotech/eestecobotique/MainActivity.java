@@ -37,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     private ProgressBar progressBar;
 
-    public static SeekBar limiteur;
+    public static SeekBar limiteurVitesse;
+    public static SeekBar limiteurDirection;
+    public static SeekBar calibrage;
     public static BluetoothSocket socket;
 
     @Override
@@ -57,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         appareilListView = findViewById(R.id.liste_appareils);
         status = findViewById(R.id.status);
         progressBar = findViewById(R.id.progressBar);
-        limiteur = findViewById(R.id.limiteur);
+        limiteurVitesse = findViewById(R.id.limiteur_vitesse);
+        limiteurDirection = findViewById(R.id.limiteur_direction);
+        calibrage = findViewById(R.id.calibrage);
 
         // bluetooth inactif ?
         if (!bluetoothAdapter.isEnabled()) {
@@ -111,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if(bluetoothAdapter == null)
+            return true;
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu, menu);
         return true;
@@ -155,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(bluetoothAdapter == null)
+            return;
         try {
             socket.close();
         } catch (Exception ignored) {}
@@ -164,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(bluetoothAdapter == null)
+            return;
         // actualise la liste des appareils
         ArrayList<BluetoothDevice> appareilsJumle = AppareilAdapter.setToArrayList(bluetoothAdapter.getBondedDevices());
         appareilAdapter = new AppareilAdapter(appareilsJumle, this);
