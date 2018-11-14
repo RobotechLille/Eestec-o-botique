@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Appareils jumelés :" />
+
+        <ListView
+            android:id="@+id/liste_appareils"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:minHeight="300dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:progress="0"
+            android:indeterminate="false"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Status : non connecté" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Limiteur de vitesse :" />
+
+        <SeekBar
+            android:id="@+id/limiteur_vitesse"
+            android:max="100"
+            android:progress="100"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Limiteur de direction :" />
+
+        <SeekBar
+            android:id="@+id/limiteur_direction"
+            android:max="100"
+            android:progress="100"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Calibrage gauche - droite :" />
+
+        <SeekBar
+            android:id="@+id/calibrage"
+            android:max="100"
+            android:progress="50"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>
