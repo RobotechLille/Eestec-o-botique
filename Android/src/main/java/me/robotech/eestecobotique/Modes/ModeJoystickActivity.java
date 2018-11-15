@@ -2,7 +2,6 @@ package me.robotech.eestecobotique.Modes;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;

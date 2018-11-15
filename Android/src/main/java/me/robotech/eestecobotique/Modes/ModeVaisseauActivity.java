@@ -1,7 +1,6 @@
 package me.robotech.eestecobotique.Modes;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.SeekBar;
 
 import me.robotech.eestecobotique.ConnectionBluetooth;
@@ -59,11 +58,11 @@ public class ModeVaisseauActivity extends ModeActivity {
             droite = puissance;
             gauche = puissance;
         }else if(direction > 50){ // droiteSeekBar
-            droite = (int) ((double) puissance * ((100d - direction) / 50d));
+            droite = (int) (((double) puissance - 127d) * ((100d - direction) / 50d)) + 127;
             gauche = puissance;
         }else{ // gaucheSeekBar
             droite = puissance;
-            gauche = (int) ((double) puissance * (direction / 50d));
+            gauche = (int) (((double) puissance - 127d) * (direction / 50d)) + 127;
         }
     }
 

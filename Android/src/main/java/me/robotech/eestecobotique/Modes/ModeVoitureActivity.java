@@ -1,14 +1,13 @@
 package me.robotech.eestecobotique.Modes;
 
-import android.os.Handler;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import me.robotech.eestecobotique.ConnectionBluetooth;
-import me.robotech.eestecobotique.MainActivity;
 import me.robotech.eestecobotique.R;
 
 public class ModeVoitureActivity extends ModeActivity {
@@ -19,12 +18,12 @@ public class ModeVoitureActivity extends ModeActivity {
     private ConnectionBluetooth connectionBluetooth;
 
     private static final double ROUE_LIBRE = -25; // par seconde
-    private static final double ACCELERATION = 60; // par secodne
+    private static final double ACCELERATION = 100; // par secodne
     private static final double FREINAGE = -100; // par seconde
     private double vitesse = 0;
 
     private boolean go;
-    private static final int DELAI_PHYSIQUE_MS = 10;
+    private static final int DELAI_PHYSIQUE_MS = ConnectionBluetooth.DELAI_MS;
     private Handler physiqueHandler;
     private Runnable physique = new Runnable() {
         @Override
@@ -49,11 +48,11 @@ public class ModeVoitureActivity extends ModeActivity {
                 droite = (int) (vitesse + 128d);
                 gauche = (int) (vitesse + 128d);
             }else if(dir > 50){ // droiteSeekBar
-                droite = (int) ((vitesse + 128d) * ((100d - dir) / 50d));
+                droite = (int) (vitesse * ((100d - dir) / 50d)) + 128;
                 gauche = (int) (vitesse + 128d);
             }else{ // gaucheSeekBar
                 droite = (int) (vitesse + 128d);
-                gauche = (int) ((vitesse + 128d) * (dir / 50d));
+                gauche = (int) (vitesse * (dir / 50d)) + 128;
             }
 
             // repeter

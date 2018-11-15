@@ -5,9 +5,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     private ProgressBar progressBar;
 
-    public static SeekBar limiteurVitesse;
-    public static SeekBar limiteurDirection;
-    public static SeekBar calibrage;
+    public static int limiteurVitesse = 100;
+    public static int limiteurDirection = 100;
+    public static int calibrage = 50;
     public static BluetoothSocket socket;
 
     @Override
@@ -59,9 +59,35 @@ public class MainActivity extends AppCompatActivity {
         appareilListView = findViewById(R.id.liste_appareils);
         status = findViewById(R.id.status);
         progressBar = findViewById(R.id.progressBar);
-        limiteurVitesse = findViewById(R.id.limiteur_vitesse);
-        limiteurDirection = findViewById(R.id.limiteur_direction);
-        calibrage = findViewById(R.id.calibrage);
+
+        SeekBar SBlimiteurVitesse = findViewById(R.id.limiteur_vitesse);
+        SeekBar SBlimiteurDirection = findViewById(R.id.limiteur_direction);
+        SeekBar SBcalibrage = findViewById(R.id.calibrage);
+
+        SBlimiteurVitesse.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {limiteurVitesse = progress;}
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+        SBlimiteurDirection.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {limiteurDirection = progress;}
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+        SBcalibrage.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {calibrage = progress;}
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
 
         // bluetooth inactif ?
         if (!bluetoothAdapter.isEnabled()) {
