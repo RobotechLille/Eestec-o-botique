@@ -67,8 +67,8 @@ void loop() {
   if(Serial2.available()){
     // g ou d recoit (unsigned) : [0, 255]
     // ce qui correspond à (signed) : [-127, 127]
-    int d = Serial2.read();
     int g = Serial2.read();
+    int d = Serial2.read();
 
     // [-inf, 0] -> 128
     // [0, inf] -> [0, inf]
